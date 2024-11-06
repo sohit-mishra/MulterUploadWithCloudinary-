@@ -22,12 +22,12 @@ const storage = new CloudinaryStorage({
 
 const upload = multer({ storage });
 
-app.get('/upload', upload.single('file'), (req, res) => {
+app.post('/', upload.single('file'), (req, res) => {
   try {
     res.json({
       success: true,
       message: 'Image uploaded successfully',
-      file: "req.file",    });
+      file: req.file,});
   } catch (error) {
     res.status(400).json({ success: false, message: error.message });
   }
@@ -35,5 +35,5 @@ app.get('/upload', upload.single('file'), (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on port http://localhost:${PORT}`);
 });
